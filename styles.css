@@ -127,32 +127,6 @@ p br {
   }
 }
 
-/* Touch devices - make button and page behavior match desktop */
-@media (hover: none) and (pointer: coarse) {
-  body {
-    --active: 1;
-    --play-state: running;
-  }
-  .sparkle-button button {
-    --active: 1;
-    --play-state: running;
-  }
-  .sparkle-button .bodydrop {
-    --active: 1;
-  }
-  .sparkle-button .particle-pen {
-    --active: 1;
-  }
-  .sparkle-button button:before {
-    opacity: 1;
-  }
-  .sparkle-button .spark:before {
-    opacity: 1;
-  }
-  .sparkle-button .particle {
-    animation-play-state: running;
-  }
-}
 
 /* Button styles removed; will be replaced by CodePen styles */
 
@@ -182,13 +156,14 @@ p br {
 
 body {
   --active: 0;
-  background: hsl(260, 0%, 6%) !important;
+  background: hsl(260, 0%, 6%);
   display: grid;
   place-items: center;
   min-height: 100vh;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   transition: background var(--transition);
   overflow: hidden;
+  touch-action: manipulation;
 }
 
 .sparkle-button button {
@@ -224,10 +199,12 @@ body {
     0 -0.05em 0 0 hsl(260 calc(var(--active) * 97%) calc(var(--active) * 60%)) inset;
   transition: box-shadow var(--transition), scale var(--transition), background var(--transition);
   scale: calc(1 + (var(--active) * 0.1));
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .sparkle-button button:active {
-  scale: 1;
+  scale: 0.95;
 }
 
 svg {
