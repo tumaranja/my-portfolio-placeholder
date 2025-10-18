@@ -343,9 +343,17 @@ svg {
   );
   position: fixed;
   inset: 0;
-  z-index: -1
+  z-index: -1;
 }
 
+@media (hover: none), (max-width: 600px) {
+  .bodydrop {
+    display: none;
+  }
+  .sparkle-button button {
+    --active: 1;
+  }
+}
 
 
 .sparkle-button button:is(:hover, :focus-visible) {
@@ -413,5 +421,3 @@ svg {
   inline-size: 1.25em;
   translate: -25% -5%;
 }
-
-
