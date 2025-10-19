@@ -102,22 +102,48 @@ document.addEventListener('DOMContentLoaded', function() {
         button.style.setProperty('--lightness', config.lightness);
     }
     
-    // Add click event listeners to color circles
-    colorCircles.forEach(circle => {
-        circle.addEventListener('click', function(e) {
-            e.preventDefault();
-            const colorName = this.getAttribute('data-color');
-            updateButtonColors(colorName);
+    // Add click event listener to the entire color picker container
+    const colorPickerContainer = document.querySelector('.color-picker-container');
+    
+    colorPickerContainer.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Only handle clicks when in hover state (circles are visible)
+        if (colorPickerContainer.matches(':hover')) {
+            const rect = colorPickerContainer.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const containerWidth = rect.width;
+            const centerX = containerWidth / 2;
             
-            // Update selection state
-            updateSelectionState(colorName);
+            // Calculate which color circle was clicked based on position
+            const relativeX = clickX - centerX;
+            const circleSpacing = 1.8; // 1.8rem spacing between circles
+            const circleIndex = Math.round(relativeX / (circleSpacing * 16)) + 3; // +3 because circles start at index 2
             
-            // Add a subtle animation feedback
-            this.style.transform = 'scale(0.8)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
+            // Map circle index to color name
+            const colorMap = {
+                2: 'yellow',
+                3: 'orange', 
+                4: 'red',
+                5: 'purple',
+                6: 'blue',
+                7: 'green'
+            };
+            
+            const colorName = colorMap[circleIndex];
+            if (colorName) {
+                updateButtonColors(colorName);
+                
+                // Add visual feedback
+                const clickedCircle = document.querySelector(`[data-color="${colorName}"]`);
+                if (clickedCircle) {
+                    clickedCircle.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        clickedCircle.style.transform = '';
+                    }, 150);
+                }
+            }
+        }
     });
     
 

@@ -150,7 +150,7 @@ p br {
   border-radius: 0 !important;
 }
 :root {
-  --transition: 0.25s;
+  --transition: 0.4s;
   --spark: 1.8s;
 }
 
@@ -448,6 +448,9 @@ svg {
   justify-content: center;
   gap: 0.5rem;
   transition: all var(--transition);
+  cursor: pointer;
+  padding: 2rem 0;
+  min-width: 18rem;
 }
 
 .color-circle {
@@ -468,14 +471,6 @@ svg {
     0 -0.05em 0 0 hsl(260 0% 0%) inset;
 }
 
-/* Default state - always has 3D effect outline */
-.color-picker-container:not(:hover) .color-circle:nth-child(4) {
-  background: hsl(260 0% 12%);
-  border: none;
-  box-shadow: 
-    0 0.05em 0 0 hsl(260 0% 30%) inset,
-    0 -0.05em 0 0 hsl(260 0% 0%) inset;
-}
 
 /* Default state for all circles - always has 3D effect outline */
 .color-picker-container:not(:hover) .color-circle {
@@ -488,56 +483,87 @@ svg {
 .color-picker-container:hover .color-circle {
   opacity: 1;
   transform: scale(1);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transition: all var(--transition) ease-out;
 }
 
-.color-picker-container:hover .color-circle:nth-child(1) {
-  transition-delay: 100ms;
-  background: hsl(45 97% 50%);
+/* Hide symbol on hover */
+.color-picker-container:hover .color-picker-symbol {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
 }
 
 .color-picker-container:hover .color-circle:nth-child(2) {
-  transition-delay: 50ms;
-  background: hsl(20 97% 40%);
+  transition-delay: 150ms;
+  background: hsl(45 97% 50%);
+  transform: translate(calc(-50% - 4.5rem), -50%) scale(1);
 }
 
 .color-picker-container:hover .color-circle:nth-child(3) {
-  transition-delay: 0ms;
-  background: hsl(0 97% 40%);
+  transition-delay: 100ms;
+  background: hsl(20 97% 40%);
+  transform: translate(calc(-50% - 2.7rem), -50%) scale(1);
 }
 
 .color-picker-container:hover .color-circle:nth-child(4) {
   transition-delay: 50ms;
-  background: hsl(260 97% 50%);
+  background: hsl(0 97% 40%);
+  transform: translate(calc(-50% - 0.9rem), -50%) scale(1);
 }
 
 .color-picker-container:hover .color-circle:nth-child(5) {
   transition-delay: 50ms;
-  background: hsl(220 97% 50%);
+  background: hsl(260 97% 50%);
+  transform: translate(calc(-50% + 0.9rem), -50%) scale(1);
 }
 
 .color-picker-container:hover .color-circle:nth-child(6) {
   transition-delay: 100ms;
+  background: hsl(220 97% 50%);
+  transform: translate(calc(-50% + 2.7rem), -50%) scale(1);
+}
+
+.color-picker-container:hover .color-circle:nth-child(7) {
+  transition-delay: 150ms;
   background: hsl(120 97% 40%);
+  transform: translate(calc(-50% + 4.5rem), -50%) scale(1);
 }
 
 .color-circle:hover {
   transform: scale(1.2);
   box-shadow: 0 0 1rem hsl(var(--hue) 97% 50% / 0.5);
+  z-index: 10;
 }
 
 .color-circle:active {
   transform: scale(0.95);
 }
 
-/* Default state - only middle circle (4th) visible */
-.color-picker-container:not(:hover) .color-circle:not(:nth-child(4)) {
-  opacity: 0;
-  transform: scale(0);
+/* Color picker symbol - always visible as component indicator */
+.color-picker-symbol {
+  --size: 1.5rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: hsl(260 0% 12%);
+  box-shadow: 
+    0 0.05em 0 0 hsl(260 0% 30%) inset,
+    0 -0.05em 0 0 hsl(260 0% 0%) inset;
+  transition: all var(--transition) ease-out;
 }
 
-.color-picker-container:not(:hover) .color-circle:nth-child(4) {
-  opacity: 1;
-  transform: scale(1);
-  background: hsl(260 calc(var(--active, 0) * 97%) calc((var(--active, 0) * 44%) + 12%));
+/* Default state - hide all color circles */
+.color-picker-container:not(:hover) .color-circle {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }
 
