@@ -150,13 +150,14 @@ p br {
   border-radius: 0 !important;
 }
 :root {
-  --transition: 0.4s;
+  --transition: 0.3s;
   --spark: 1.8s;
 }
 
 body {
   --active: 0;
-  background: hsl(260, 0%, 6%);
+  --background-hue: 260;
+  background: hsl(var(--background-hue), 0%, 6%);
   display: grid;
   place-items: center;
   min-height: 100vh;
@@ -341,7 +342,7 @@ svg {
 
 .bodydrop {
   background: hsl(
-    260
+    var(--background-hue)
     calc(var(--active) * 97%)
     6%
   );
@@ -449,7 +450,7 @@ svg {
   gap: 0.5rem;
   transition: all var(--transition);
   cursor: pointer;
-  padding: 2rem 0;
+  padding: 1rem 0;
   min-width: 18rem;
 }
 
@@ -460,7 +461,7 @@ svg {
   border-radius: 50%;
   cursor: pointer;
   position: relative;
-  transition: all var(--transition);
+  transition: scale var(--transition), box-shadow var(--transition), background var(--transition);
   border: none;
   background: hsl(260 calc(var(--active, 0) * 97%) calc((var(--active, 0) * 44%) + 12%));
   opacity: 0;
@@ -470,7 +471,6 @@ svg {
     0 0.05em 0 0 hsl(260 0% 30%) inset,
     0 -0.05em 0 0 hsl(260 0% 0%) inset;
 }
-
 
 /* Default state for all circles - always has 3D effect outline */
 .color-picker-container:not(:hover) .color-circle {
@@ -496,13 +496,13 @@ svg {
 }
 
 .color-picker-container:hover .color-circle:nth-child(2) {
-  transition-delay: 150ms;
+  transition-delay: 50ms;
   background: hsl(45 97% 50%);
   transform: translate(calc(-50% - 4.5rem), -50%) scale(1);
 }
 
 .color-picker-container:hover .color-circle:nth-child(3) {
-  transition-delay: 100ms;
+  transition-delay: 50ms;
   background: hsl(20 97% 40%);
   transform: translate(calc(-50% - 2.7rem), -50%) scale(1);
 }
@@ -520,25 +520,31 @@ svg {
 }
 
 .color-picker-container:hover .color-circle:nth-child(6) {
-  transition-delay: 100ms;
+  transition-delay: 50ms;
   background: hsl(220 97% 50%);
   transform: translate(calc(-50% + 2.7rem), -50%) scale(1);
 }
 
 .color-picker-container:hover .color-circle:nth-child(7) {
-  transition-delay: 150ms;
+  transition-delay: 50ms;
   background: hsl(120 97% 40%);
   transform: translate(calc(-50% + 4.5rem), -50%) scale(1);
 }
 
 .color-circle:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
   box-shadow: 0 0 1rem hsl(var(--hue) 97% 50% / 0.5);
   z-index: 10;
 }
 
+
 .color-circle:active {
-  transform: scale(0.95);
+  scale: 0.95;
+}
+
+/* Ensure proper hover effects work with the new click handlers */
+.color-circle {
+  pointer-events: auto;
 }
 
 /* Color picker symbol - always visible as component indicator */

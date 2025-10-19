@@ -50,47 +50,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const colorCircles = document.querySelectorAll('.color-circle');
     const button = document.querySelector('.sparkle-button button');
     
-    // Color configurations for each hue
+    // Color configurations for each hue - matching CSS values
     const colorConfigs = {
         yellow: {
             primary: 45,
             secondary: 55,
             glow: 45,
-            lightness: 50
+            lightness: 50,
+            background: 45
         },
         purple: {
             primary: 260,
             secondary: 270,
             glow: 260,
-            lightness: 50
+            lightness: 50,
+            background: 260
         },
         blue: {
             primary: 220,
-            secondary: 240,
+            secondary: 230,
             glow: 220,
-            lightness: 50
+            lightness: 50,
+            background: 220
         },
         green: {
             primary: 120,
             secondary: 140,
             glow: 140,
-            lightness: 40
+            lightness: 40,
+            background: 120
         },
         orange: {
             primary: 20,
             secondary: 25,
             glow: 20,
-            lightness: 40
+            lightness: 40,
+            background: 20
         },
         red: {
             primary: 0,
             secondary: 10,
             glow: 0,
-            lightness: 40
+            lightness: 40,
+            background: 0
         }
     };
     
-    // Function to update button colors
+    // Function to update button colors and background
     function updateButtonColors(colorName) {
         const config = colorConfigs[colorName];
         if (!config) return;
@@ -100,57 +106,32 @@ document.addEventListener('DOMContentLoaded', function() {
         button.style.setProperty('--secondary-hue', config.secondary);
         button.style.setProperty('--glow-hue', config.glow);
         button.style.setProperty('--lightness', config.lightness);
+        
+        // Update CSS custom properties for the background
+        document.body.style.setProperty('--background-hue', config.background);
     }
     
-    // Add click event listener to the entire color picker container
-    const colorPickerContainer = document.querySelector('.color-picker-container');
-    
-    colorPickerContainer.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Only handle clicks when in hover state (circles are visible)
-        if (colorPickerContainer.matches(':hover')) {
-            const rect = colorPickerContainer.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
-            const containerWidth = rect.width;
-            const centerX = containerWidth / 2;
+    // Add click event listeners to each color circle
+    colorCircles.forEach(circle => {
+        circle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            // Calculate which color circle was clicked based on position
-            const relativeX = clickX - centerX;
-            const circleSpacing = 1.8; // 1.8rem spacing between circles
-            const circleIndex = Math.round(relativeX / (circleSpacing * 16)) + 3; // +3 because circles start at index 2
-            
-            // Map circle index to color name
-            const colorMap = {
-                2: 'yellow',
-                3: 'orange', 
-                4: 'red',
-                5: 'purple',
-                6: 'blue',
-                7: 'green'
-            };
-            
-            const colorName = colorMap[circleIndex];
-            if (colorName) {
+            const colorName = this.getAttribute('data-color');
+            if (colorName && colorConfigs[colorName]) {
                 updateButtonColors(colorName);
                 
-                // Add visual feedback
-                const clickedCircle = document.querySelector(`[data-color="${colorName}"]`);
-                if (clickedCircle) {
-                    clickedCircle.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        clickedCircle.style.transform = '';
-                    }, 150);
-                }
+                // Add visual feedback to the clicked circle - matching button motion
+                this.style.scale = '0.95';
+                setTimeout(() => {
+                    this.style.scale = '';
+                }, 150);
             }
-        }
+        });
     });
-    
-
     
     // Initialize with purple (default)
     updateButtonColors('purple');
-    updateSelectionState('purple');
 });
 
 
