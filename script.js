@@ -45,4 +45,86 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Color Picker functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const colorCircles = document.querySelectorAll('.color-circle');
+    const button = document.querySelector('.sparkle-button button');
+    
+    // Color configurations for each hue
+    const colorConfigs = {
+        yellow: {
+            primary: 45,
+            secondary: 55,
+            glow: 45,
+            lightness: 50
+        },
+        purple: {
+            primary: 260,
+            secondary: 270,
+            glow: 260,
+            lightness: 50
+        },
+        blue: {
+            primary: 220,
+            secondary: 240,
+            glow: 220,
+            lightness: 50
+        },
+        green: {
+            primary: 120,
+            secondary: 140,
+            glow: 140,
+            lightness: 40
+        },
+        orange: {
+            primary: 20,
+            secondary: 25,
+            glow: 20,
+            lightness: 40
+        },
+        red: {
+            primary: 0,
+            secondary: 10,
+            glow: 0,
+            lightness: 40
+        }
+    };
+    
+    // Function to update button colors
+    function updateButtonColors(colorName) {
+        const config = colorConfigs[colorName];
+        if (!config) return;
+        
+        // Update CSS custom properties for the button
+        button.style.setProperty('--primary-hue', config.primary);
+        button.style.setProperty('--secondary-hue', config.secondary);
+        button.style.setProperty('--glow-hue', config.glow);
+        button.style.setProperty('--lightness', config.lightness);
+    }
+    
+    // Add click event listeners to color circles
+    colorCircles.forEach(circle => {
+        circle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const colorName = this.getAttribute('data-color');
+            updateButtonColors(colorName);
+            
+            // Update selection state
+            updateSelectionState(colorName);
+            
+            // Add a subtle animation feedback
+            this.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+    
+
+    
+    // Initialize with purple (default)
+    updateButtonColors('purple');
+    updateSelectionState('purple');
+});
+
 
