@@ -18,6 +18,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const button = document.querySelector('.sparkle-button button');
     
     if (button) {
+        const BOUNCE_DURATION = 600;
+        let bounceTimeout;
+
+        const activateBounce = () => {
+            button.classList.add('is-pointer-active');
+            clearTimeout(bounceTimeout);
+        };
+
+        const deactivateBounce = () => {
+            clearTimeout(bounceTimeout);
+            bounceTimeout = setTimeout(() => {
+                button.classList.remove('is-pointer-active');
+            }, BOUNCE_DURATION);
+        };
+
+        // Mirror hover sparkle animation on touch devices.
+        button.addEventListener('pointerdown', activateBounce);
+        button.addEventListener('pointerup', deactivateBounce);
+        button.addEventListener('pointercancel', deactivateBounce);
+        button.addEventListener('pointerleave', deactivateBounce);
+
         button.addEventListener('click', function(e) {
             // Get button position for centered burst
             const rect = button.getBoundingClientRect();
@@ -133,5 +154,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize with purple (default)
     updateButtonColors('purple');
 });
-
 

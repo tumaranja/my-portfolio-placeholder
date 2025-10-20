@@ -227,7 +227,8 @@ svg {
   transition: color var(--transition);
 }
 
-.sparkle-button button:is(:hover, :focus-visible) path {
+.sparkle-button button:is(:hover, :focus-visible) path,
+.sparkle-button button.is-pointer-active path {
   animation-name: bounce;
 }
 
@@ -326,7 +327,8 @@ svg {
 
 
 @supports(selector(:has(:is(+ *)))) {
-  body:has(button:is(:hover, :focus-visible)) {
+  body:has(button:is(:hover, :focus-visible)),
+  body:has(button.is-pointer-active) {
     --active: 1;
     --play-state: running;
   }
@@ -335,7 +337,8 @@ svg {
   }
 }
 
-.sparkle-button button:is(:hover, :focus-visible) ~ :is(.bodydrop, .particle-pen) {
+.sparkle-button button:is(:hover, :focus-visible) ~ :is(.bodydrop, .particle-pen),
+.sparkle-button button.is-pointer-active ~ :is(.bodydrop, .particle-pen) {
   --active: 1;
   --play-state: runnin;
 }
@@ -361,7 +364,8 @@ svg {
 }
 
 
-.sparkle-button button:is(:hover, :focus-visible) {
+.sparkle-button button:is(:hover, :focus-visible),
+.sparkle-button button.is-pointer-active {
   --active: 1;
   --play-state: running;
 }
