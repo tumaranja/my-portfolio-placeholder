@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 var originX = rect.left + rect.width / 2;
                 var originY = rect.top + rect.height / 2;
                 document.body.style.transformOrigin = originX + 'px ' + originY + 'px';
-                document.body.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 1, 1), transform 1s cubic-bezier(0.05, 0, 1, 0.2)';
+                document.body.style.transition = 'opacity 0.5s cubic-bezier(0.4, 0, 1, 1), transform 0.6s cubic-bezier(0.05, 0, 1, 0.2)';
                 document.body.style.opacity = '0';
                 document.body.style.transform = 'scale(8)';
                 setTimeout(function() {
                     window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
-                }, 800);
+                }, 600);
             }, 200);
         });
     }
