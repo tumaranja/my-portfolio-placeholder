@@ -13,7 +13,14 @@ PARTICLES.forEach(P => {
     `)
 })
 
-// EmojiBlast functionality
+window.addEventListener('pageshow', function(e) {
+    if (e.persisted) {
+        document.body.style.transition = 'none';
+        document.body.style.opacity = '1';
+        document.body.style.transform = 'none';
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const button = document.querySelector('.sparkle-button button');
     
