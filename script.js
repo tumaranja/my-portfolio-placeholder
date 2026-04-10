@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('pointercancel', deactivateBounce);
         button.addEventListener('pointerleave', deactivateBounce);
 
-        button.addEventListener('click', function(e) {
+        button.addEventListener('mousedown', function(e) {
             window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
         });
     }
