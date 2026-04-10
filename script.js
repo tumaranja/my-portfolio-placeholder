@@ -40,28 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('pointerleave', deactivateBounce);
 
         button.addEventListener('click', function(e) {
-            // Get button position for centered burst
-            const rect = button.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            // Trigger emoji burst
-            emojiBlast({
-                emojis: ['✨'],
-                position: {
-                    x: 0,
-                    y: 0,
-                },
-                duration: 2000,
-                emojiCount: 8,
-                physics: {
-                    fontSize: { min: 14, max: 28 },
-                    gravity: 0.35,
-                    initialVelocities: {
-                        x: { min: -80, max: 80 },
-                        y: { min: -80, max: 80 }
-                    }
-                },
-            });
+            window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
         });
     }
 });

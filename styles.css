@@ -43,9 +43,16 @@ p {
   hyphens: none;
 }
 
-p br {
-  display: block;
-  margin: 0.2em 0;
+.br-md, .br-lg {
+  display: none;
+}
+
+@media (min-width: 481px) {
+  .br-md { display: inline; }
+}
+
+@media (min-width: 768px) {
+  .br-lg { display: inline; }
 }
 
 /* Mobile-first adjustments */
@@ -57,9 +64,7 @@ p br {
     font-size: 1.2rem; 
     text-align: center;
   }
-  p br {
-    display: none;
-  }
+
   .cta { margin-top: 1.375rem; }
   .sparkle-button { margin-top: 2.75rem; }
   .glow-button { padding: 12px 22px; font-size: 1rem; }
