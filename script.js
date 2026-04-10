@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 var originX = rect.left + rect.width / 2;
                 var originY = rect.top + rect.height / 2;
                 document.body.style.transformOrigin = originX + 'px ' + originY + 'px';
-                document.body.style.transition = 'opacity 0.7s cubic-bezier(0.7, 0, 1, 0.15), transform 0.7s cubic-bezier(0.7, 0, 1, 0.15)';
+                document.body.style.transition = 'opacity 0.7s cubic-bezier(0.7, 0, 0.6, 1), transform 0.7s cubic-bezier(0.7, 0, 1, 0.15)';
                 document.body.style.opacity = '0';
                 document.body.style.transform = 'scale(8)';
                 setTimeout(function() {
