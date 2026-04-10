@@ -40,11 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('pointerleave', deactivateBounce);
 
         button.addEventListener('mousedown', function(e) {
-            document.body.style.transition = 'opacity 0.8s ease';
-            document.body.style.opacity = '0';
             setTimeout(function() {
-                window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
-            }, 800);
+                document.body.style.transition = 'opacity 0.8s ease';
+                document.body.style.opacity = '0';
+                setTimeout(function() {
+                    window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
+                }, 800);
+            }, 200);
         });
     }
 });
