@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         button.addEventListener('mousedown', function(e) {
             setTimeout(function() {
-                document.body.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                document.body.style.transition = 'opacity 0.8s ease-in, transform 0.8s cubic-bezier(0.3, 0, 1, 1)';
                 document.body.style.opacity = '0';
-                document.body.style.transform = 'scale(1.5)';
+                document.body.style.transform = 'scale(3)';
                 setTimeout(function() {
                     window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
                 }, 800);
