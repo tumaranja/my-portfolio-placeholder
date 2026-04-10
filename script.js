@@ -41,9 +41,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         button.addEventListener('mousedown', function(e) {
             setTimeout(function() {
-                document.body.style.transition = 'opacity 0.8s ease-in, transform 0.8s cubic-bezier(0.3, 0, 1, 1)';
+                var rect = button.getBoundingClientRect();
+                var originX = rect.left + rect.width / 2;
+                var originY = rect.top + rect.height / 2;
+                document.body.style.transformOrigin = originX + 'px ' + originY + 'px';
+                document.body.style.transition = 'opacity 0.7s cubic-bezier(0.4, 0, 1, 1), transform 0.8s cubic-bezier(0.4, 0, 1, 0.9)';
                 document.body.style.opacity = '0';
-                document.body.style.transform = 'scale(3)';
+                document.body.style.transform = 'scale(8)';
                 setTimeout(function() {
                     window.location.href = 'https://www.linkedin.com/in/anjapetrovic/';
                 }, 800);
