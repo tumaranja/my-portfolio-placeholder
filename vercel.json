@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/resume", "destination": "https://portfolio-pink-zeta-73.vercel.app/resume" },
+    { "source": "/resume/:path*", "destination": "https://portfolio-pink-zeta-73.vercel.app/resume/:path*" },
+    { "source": "/_next/:path*", "destination": "https://portfolio-pink-zeta-73.vercel.app/_next/:path*" }
+  ]
+}
